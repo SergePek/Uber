@@ -1,7 +1,10 @@
 package ru.pekcherkin.androiduberremake.Model;
 
 public class DriverInfoModel {
-    private String firstName, lastName, phoneNumber;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String avatar;
     private double rating;
 
     public DriverInfoModel() {
@@ -37,5 +40,13 @@ public class DriverInfoModel {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

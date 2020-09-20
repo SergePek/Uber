@@ -221,6 +221,9 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             } else {
+                /////
+                if(response != null)
+                    /////////
                 Toast.makeText(this, "[Ошибка]: " + response.getError().getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
