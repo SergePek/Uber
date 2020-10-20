@@ -10,10 +10,12 @@ import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
 import ru.pekcherkin.androiduberremake.Model.DriverInfoModel;
+import ru.pekcherkin.androiduberremake.Utils.UserUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +35,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.Arrays;
 import java.util.List;
@@ -89,6 +93,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         listener = myFirebaseAuth -> {
             FirebaseUser user = myFirebaseAuth.getCurrentUser();
             if (user != null) {
+                //update token
+                FirebaseInstanceId.getInstance().getInstanceId()
+                        .addOnFailureListener(e -> Toast.makeText(SplashScreenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show())
+                        .addOnSuccessListener(instanceIdResult -> {
+                            Log.d("TOKEN", instanceIdResult.getToken());
+                            UserUtils.updateToken(SplashScreenActivity.this, instanceIdResult.getToken());
+                        });
+
                 checkUserFromFirebase();
             } else
                 showLoginLayout();
