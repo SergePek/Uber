@@ -14,4 +14,6 @@
 
     <string name="home_second">Home Second</string>
     <string name="title_activity_maps">Map</string>
+    <string name="driver_arrived">Driver arrived</string>
+    <string name="time_over">Time over</string>
 </resources>

@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import androidx.core.app.NotificationCompat;
 import ru.pekcherkin.androiduberremake.Model.DriverInfoModel;
@@ -31,8 +32,21 @@ public class Common {
     public static final String RIDER_KEY = "RiderKey";
     public static final String REQUEST_DRIVER_DECLINE = "Decline";
     public static final String DRIVER_KEY = "DriverKey";
+    public static final String RIDER_PICKUP_LOCATION_STRING = "PickupLocationString";
+    public static final String RIDER_DESTINATION_STRING = "DestinationLocationString";
+    public static final String RIDER_DESTINATION = "DestinationLocation";
+    public static final String RIDER_INFO = "Riders";
+    public static final String REQUEST_DRIVER_ACCEPT = "Accept";
+    public static final String TRIP_KEY = "TripKey";
+    public static final String TRIP_PICKUP_REF = "TripPickupLocation";
+    public static final double MIN_RANGE_PICKUP_IN_KM = 0.05;
+    public static final int WAIT_TIME_IN_MIN = 1;
+    public static final String TRIP_DESTINATION_LOCATION_REF = "TripDestinationLocation";
+    public static final String REQUEST_DRIVER_DECLINE_AND_REMOVE_TRIP = "DeclineAndRemoveTrip";
+    public static final String RIDER_COMPLETE_TRIP = "DriverCompleteTrip";
 
     public static DriverInfoModel currentUser;
+    public static String Trip = "Trips";
 
     public static String builderWelcomeMessage() {
         if(Common.currentUser != null){
@@ -106,5 +120,13 @@ public class Common {
             poly.add(p);
         }
         return poly;
+    }
+
+    public static String createUniqueTripIdNumber(long timeOffset) {
+        Random random = new Random();
+        Long current = System.currentTimeMillis() + timeOffset;
+        Long unique = current + random.nextLong();
+        if(unique < 0) unique *= -1;
+        return String.valueOf(unique);
     }
 }
